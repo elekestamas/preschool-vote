@@ -75,6 +75,6 @@ public class VoteServiceImplTest {
 
 	@BeforeClass
 	public static void initService() {
-		voteService = new VoteServiceImpl();
+		voteService = VoteServiceImpl.getInstance();
 	}
 }

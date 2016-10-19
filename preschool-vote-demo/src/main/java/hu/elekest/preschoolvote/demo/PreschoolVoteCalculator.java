@@ -9,17 +9,19 @@ import java.io.InputStreamReader;
 import hu.elekest.preschoolvote.exception.ErrorCode;
 import hu.elekest.preschoolvote.exception.VoteServiceException;
 import hu.elekest.preschoolvote.model.Child;
+import hu.elekest.preschoolvote.service.VoteService;
 import hu.elekest.preschoolvote.service.VoteServiceImpl;
 
 public class PreschoolVoteCalculator {
 
 	public static void main(String[] args) {
 		try {
-			Child winner = new VoteServiceImpl().processVotesAndGetWinner(getInputStreamFromConsole());
+			VoteService voteService = VoteServiceImpl.getInstance();
+			Child winner = voteService.processVotesAndGetWinner(getInputStreamFromConsole());
 			System.out.println(
 					"The winner is: '" + winner.getName() + "' with '" + winner.getNumberOfVotes() + "' votes!");
 		} catch (VoteServiceException e) {
-			e.printStackTrace();
+			System.out.println("An error occured with error code: '" + e.getErrorCode().name() + "' while running the program.");
 		}
 	}
 

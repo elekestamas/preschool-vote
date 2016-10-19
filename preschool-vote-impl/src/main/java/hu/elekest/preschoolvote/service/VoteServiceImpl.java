@@ -19,6 +19,19 @@ import hu.elekest.preschoolvote.model.Vote;
 
 public class VoteServiceImpl implements VoteService {
 
+	private static VoteService voteService;
+	
+	private VoteServiceImpl() {
+		//
+	}
+	
+	public static VoteService getInstance() {
+		if(voteService == null) {
+			voteService = new VoteServiceImpl();
+		}
+		return voteService;
+	}
+	
 	public Child processVotesAndGetWinner(InputStream inputStream) throws VoteServiceException {
 		if (inputStream == null) {
 			throw new VoteServiceException(ErrorCode.INPUT_STREAM_MAY_NOT_BE_NULL);
